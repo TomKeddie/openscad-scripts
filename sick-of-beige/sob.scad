@@ -19,9 +19,8 @@
 board="DP5050";
 thickness=3;
 hole_diameter=3.2;
+two_d_render=0;
 // customise end
-
-corner_radius=4;
 
 sizes = [
     [ "DP5031" ,    50 , 31 ], 
@@ -38,28 +37,40 @@ sizes = [
     [ "DP7070" ,    70 , 70 ], 
     [ "DP8080" ,    80 , 80 ]];
 
+
+module draw_panel(xsize, ysize) {
+    corner_radius=4;
+
+    difference()
+    {
+        hull()
+        {
+            translate([corner_radius, corner_radius, 0]) circle(r=corner_radius, $fn=32);
+            translate([xsize-corner_radius, corner_radius, 0]) circle(r=corner_radius, $fn=32);
+            translate([corner_radius, ysize-corner_radius, 0]) circle(r=corner_radius, $fn=32);
+            translate([xsize-corner_radius, ysize-corner_radius, 0]) circle(r=corner_radius, $fn=32);
+        }
+        translate([corner_radius, corner_radius, 0]) circle(r=hole_diameter/2, $fn=32);
+        translate([xsize-corner_radius, corner_radius, 0]) circle(r=hole_diameter/2, $fn=32);
+        translate([corner_radius, ysize-corner_radius, 0]) circle(r=hole_diameter/2, $fn=32);
+        translate([xsize-corner_radius, ysize-corner_radius, 0]) circle(r=hole_diameter/2, $fn=32);
+    }
+}
+
 for(i = sizes)
 {
     if (board == i[0])
     {
-        difference()
+        if (two_d_render == 0)
         {
             linear_extrude(height=thickness)
-            hull()
             {
-                translate([corner_radius, corner_radius, 0]) circle(r=corner_radius, $fn=32);
-                translate([i[1]-corner_radius, corner_radius, 0]) circle(r=corner_radius, $fn=32);
-                translate([corner_radius, i[2]-corner_radius, 0]) circle(r=corner_radius, $fn=32);
-                translate([i[1]-corner_radius, i[2]-corner_radius, 0]) circle(r=corner_radius, $fn=32);
+                draw_panel(i[1], i[2]);
             }
-            translate([corner_radius, corner_radius, 0])
-                cylinder(h=thickness, r=hole_diameter/2, $fn=32);
-            translate([i[1]-corner_radius, corner_radius, 0])
-                cylinder(h=thickness, r=hole_diameter/2, $fn=32);
-            translate([corner_radius, i[2]-corner_radius, 0])
-                cylinder(h=thickness, r=hole_diameter/2, $fn=32);
-            translate([i[1]-corner_radius, i[2]-corner_radius, 0])
-                cylinder(h=thickness, r=hole_diameter/2, $fn=32);
+        }
+        else
+        {
+            draw_panel(i[1], i[2]);
         }
     }
 }

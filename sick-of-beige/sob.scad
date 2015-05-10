@@ -19,7 +19,7 @@
 board="DP5050";
 thickness=3;
 hole_diameter=3.2;
-two_d_render=0;
+two_d_render=1;
 // customise end
 
 sizes = [

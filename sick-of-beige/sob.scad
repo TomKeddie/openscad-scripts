@@ -50,10 +50,10 @@ module draw_panel(xsize, ysize) {
             translate([corner_radius, ysize-corner_radius, 0]) circle(r=corner_radius, $fn=32);
             translate([xsize-corner_radius, ysize-corner_radius, 0]) circle(r=corner_radius, $fn=32);
         }
-        translate([corner_radius, corner_radius, 0]) circle(r=hole_diameter/2, $fn=32);
-        translate([xsize-corner_radius, corner_radius, 0]) circle(r=hole_diameter/2, $fn=32);
-        translate([corner_radius, ysize-corner_radius, 0]) circle(r=hole_diameter/2, $fn=32);
-        translate([xsize-corner_radius, ysize-corner_radius, 0]) circle(r=hole_diameter/2, $fn=32);
+        color([1,0,0]) translate([corner_radius, corner_radius, 0]) circle(r=hole_diameter/2, $fn=32);
+        color([1,0,0]) translate([xsize-corner_radius, corner_radius, 0]) circle(r=hole_diameter/2, $fn=32);
+        color([1,0,0]) translate([corner_radius, ysize-corner_radius, 0]) circle(r=hole_diameter/2, $fn=32);
+        color([1,0,0]) translate([xsize-corner_radius, ysize-corner_radius, 0]) circle(r=hole_diameter/2, $fn=32);
     }
 }
 
@@ -74,3 +74,4 @@ for(i = sizes)
         }
     }
 }
+

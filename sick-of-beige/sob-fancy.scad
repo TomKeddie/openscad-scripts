@@ -47,12 +47,12 @@ sizes = [
 module user_cutout_blackmagicmini(layer, xsize, ysize)
 {
     // USB connector
-    translate([-5,ysize/2,0]) square([8, 12], center=true);
+    translate([-5,ysize/2,0]) square(10, center=true);
 
     if (layer != "bottom")
     {
         // connector pins
-        #translate([xsize+2,ysize/2,0]) square([12, 14], center=true);
+        #translate([xsize+2,ysize/2,0]) square([12, 18], center=true);
     }
 
     if (layer == "top")
